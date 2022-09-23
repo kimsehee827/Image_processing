@@ -13,9 +13,9 @@ img4 = np.zeros((H, W, C), img.dtype)
 for y in range(H):
     for x in range(W):
         #for C in range(3):
-        img2[y, x, 0] = img[y,x,0]
-        img3[y, x, 1] = img[y,x,1]
-        img4[y, x, 2] = img[y,x,2]
+        img2[y, x,0] = img[y,x,0]
+        img3[y, x,1] = img[y,x,1]
+        img4[y, x,2] = img[y,x,2]
 
 cv.imwrite('D:/mandrill2.bmp',img2)
 cv.imwrite('D:/mandrill3.bmp',img3)
