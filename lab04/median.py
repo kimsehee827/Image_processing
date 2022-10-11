@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 img = cv.imread("pepper_noise.bmp", cv.IMREAD_GRAYSCALE)
-cv.imshow("img", img)
+cv.imshow("pepper", img)
 H,W = img.shape[:]
 median = np.zeros((H,W), img.dtype)
 array = np.zeros(9, img.dtype)
@@ -21,7 +21,7 @@ for i in range(H):
             for sj in range(num-1-si):
                 if array[sj] > array[sj+1]:
                     array[sj], array[sj+1] = array[sj+1], array[sj]
-        median[i,j] = array[4]
+        median[i,j] = array[int(num/2)]
 
 
 

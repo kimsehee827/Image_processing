@@ -1,7 +1,8 @@
 import cv2 as cv
 import numpy as np
 
-img = cv.imread("coin.bmp", cv.IMREAD_GRAYSCALE)
+img = cv.imread("C:/Users/straw/PycharmProjects/pythonProject2/lab06/tophat.jpg", cv.IMREAD_GRAYSCALE)
+
 cv.imshow("img", img)
 H,W = img.shape[:]
 otsu = np.zeros((H, W), img.dtype)
