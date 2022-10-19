@@ -1,38 +1,30 @@
 import cv2 as cv
 import numpy as np
+import math
 
-img = cv.imread("mandrill.bmp", cv.IMREAD_COLOR)
-cv.imshow("img", img)
-H, W, C = img.shape[:]
-output = np.zeros((2*H, 3*W, C), img.dtype)
+src = cv.imread("Mandrill.bmp", cv.IMREAD_COLOR)
+cv.imshow("img", src)
+H, W, C = src.shape[:]
+output = np.zeros((2*H, 3*W, C), src.dtype)
 ratioX = 3.0
 ratioY = 2.0
 
-for yd in range(H*2):
-    for xd in range(W*3):
+for yd in range(H*int(ratioY)):
+    for xd in range(W*int(ratioX)):
         xo = xd / ratioX
         yo = yd / ratioY
-        #내림
-        xod = (xd // 3)
-        yod = (yd // 2)
-        # 올림
-        xou = - (- xd // 3)
-        you = - (- yd // 2)
 
-        a = xo - xod
-        b = yo - yod
-        A = (1 - a) * (1 - b)
-        B = a * (1 - b)
-        C = (1 - a) * b
-        D = a * b
+        xf = (xd // 3)
+        yf = (yd // 2)
 
-        for c in range(3):
-            if (xou < 256) and (you < 256):
-                output[yd, xd, c] = A * img[yod, xod, c] + B * img[yod, xou, c] + C * img[you, xod, c] + D * img[
-                    you, xou, c]
-            else:
-                output[yd, xd, c] = img[yod, xod, c]
+        xc = -(- xd // 3)
+        yc = -(- yd // 2)
 
+        a = xo - xf
+        b = yo - yf
+
+        if (xc < 256) and (yc < 256):
+            output[yd, xd] = (1-a)*(1-b) * src[yf, xf] + a*(1-b) * src[yf, xc] + (1 - a) * b * src[yc, xf] + a*b * src[yc, xc]
 
 cv.imwrite("geometric.bmp", output)
 cv.imshow("geometric", output)
